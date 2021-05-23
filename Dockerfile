@@ -1,6 +1,6 @@
 FROM python:3.9-alpine
 
-LABEL maintainer="Robert de Bock <robert@meinit.nl>"
+LABEL maintainer="Michael Buluma"
 
 WORKDIR /github/workspace
 
