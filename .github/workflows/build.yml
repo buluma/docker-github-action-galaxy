@@ -18,15 +18,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Test building image.
-        run: docker build -t docker-ansible .
+      #- name: Test building image.
+      #  run: docker build -t docker-ansible .
 
-      - name: Run the built image.
-        run: docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro docker-ansible
+      #- name: Run the built image.
+      #  run: docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro docker-ansible
 
-      - name: Verify Ansible is accessible in the built image.
-        run: docker exec --tty test-container env TERM=xterm ansible --version
+      #- name: Verify Ansible is accessible in the built image.
+      #  run: docker exec --tty test-container env TERM=xterm ansible --version
       
+      - uses: actions/github-script@v4
+        id: set-result
+        with:
+          script: return "Hello!"
+          result-encoding: string
+          
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
+        
       - name: Create Issue
         if: failure()
         uses: buluma/create-an-issue@v2
@@ -34,6 +43,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/ISSUE_TEMPLATE/bug_report.md
-          id: create-issue
-      - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
-      - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
