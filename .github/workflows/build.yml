@@ -31,12 +31,9 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: console.log(context.payload.commits)
-      
-      - name: Get result
-#         run: echo "${{steps.set-result.outputs.result}}"
-        run: echo "${{context.payload.commits}}"
         
-      - uses: actions/github-script@v4
+      - name: json check  
+        uses: actions/github-script@v4
         id: my-script
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
