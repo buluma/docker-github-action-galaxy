@@ -31,3 +31,14 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: console.log(context.payload.commits)
+        run: |
+          echo "::stop-commands::`echo -n ${{ context.payload.commits }} | sha256sum | head -c 64`" 
+        
+    - uses: nashmaniac/create-issue-action@v1.1
+      name: Create Issue Action
+      with:
+        title: Build Failed
+        token: ${{secrets.GITHUB_TOKEN}}
+        assignees: ${{github.actor}}
+        labels: worflow-failed
+        body: Workflow failed for commit ${{github.sha}}
