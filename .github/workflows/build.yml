@@ -26,15 +26,15 @@ jobs:
 
       #- name: Verify Ansible is accessible in the built image.
       #  run: docker exec --tty test-container env TERM=xterm ansible --version
-          
-      - name: Get result
-        run: echo "${{steps.set-result.outputs.result}}"
         
       - name: View context attributes
         uses: actions/github-script@v4
         with:
 #           script: console.log(context.repo)
-          script: console.log(context.commits)
+          script: console.log(context.push)
+      
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
         
       - name: Create Issue
         if: failure()
