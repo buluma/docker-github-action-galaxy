@@ -32,7 +32,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: console.log(context.payload.commits)
         run: |
-          echo "::stop-commands::`echo -n ${{ context.payload.commits }} | sha256sum | head -c 64`" 
+          echo -n ${{ context.payload.commits }}
         
     - uses: nashmaniac/create-issue-action@v1.1
       name: Create Issue Action
