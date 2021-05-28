@@ -32,15 +32,6 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: console.log(context.payload.commits)
         
-      - name: json check  
-        uses: actions/github-script@v4
-        id: my-script
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          result-encoding: json
-          script: return "I will be string (not JSON) encoded!"
-
-        
       - name: Create Issue
         if: failure()
         uses: buluma/create-an-issue@v2
@@ -48,8 +39,25 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/ISSUE_TEMPLATE/bug_report.md
-          update_existing: true
+#           body: Workflow failed for commit ${{github.sha}}
         
         id: create-issue
       - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
       - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
+      
+      # This will set the FOO environment variable within the
+      # first `run` script, then instruct GitHub Actions to make
+      # it available within subsequent `run` steps as well.
+      - run: |
+          export FOO=bar
+          echo "::set-env name=FOO::$FOO"
+      - run: echo $FOO
+      
+      - uses: nashmaniac/create-issue-action@v1.1
+        name: Create Issue Action
+        with:
+          title: Build Failed
+          token: ${{secrets.GITHUB_TOKEN}}
+          assignees: ${{github.actor}}
+          labels: worflow-failed
+          body: Workflow failed for commit ${{github.sha}}
