@@ -1,5 +1,5 @@
 ---
-name: Build
+name: Job2
 
 on:
   pull_request:
