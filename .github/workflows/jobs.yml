@@ -1,3 +1,14 @@
+---
+name: Job
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron:  '30 5,17 * * *'
+    
 jobs:
   example-job:
     name: example
