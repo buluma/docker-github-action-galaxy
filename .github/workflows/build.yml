@@ -34,7 +34,15 @@ jobs:
       
       - name: Get result
 #         run: echo "${{steps.set-result.outputs.result}}"
-        run: echo "${{steps}}"
+        run: echo "${{context.payload.commits}}"
+        
+      - uses: actions/github-script@v4
+        id: my-script
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: json
+          script: return "I will be string (not JSON) encoded!"
+
         
       - name: Create Issue
         if: failure()
