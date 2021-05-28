@@ -32,11 +32,12 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: console.log(context.payload.commits)
           
-      - uses: nashmaniac/create-issue-action@v1.1
-        name: Create Issue Action
+      - name: Create Issue Action
+        if: failure()
+        uses: nashmaniac/create-issue-action@v1.1
         with:
           title: Build Failed
           token: ${{secrets.GITHUB_TOKEN}}
           assignees: ${{github.actor}}
-          labels: worflow-failed
+          labels: bug
           body: Workflow failed for commit ${{github.sha}}
