@@ -1,5 +1,5 @@
 ---
-name: Job2
+name: CI Test
 
 on:
   pull_request:
