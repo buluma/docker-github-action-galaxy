@@ -34,7 +34,7 @@ jobs:
         uses: actions/github-script@v4
         with:
 #           script: console.log(context.repo)
-          script: console.log(context.commits[][id])
+          script: console.log(context.commits)
         
       - name: Create Issue
         if: failure()
