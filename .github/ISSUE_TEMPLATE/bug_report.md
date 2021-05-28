@@ -7,4 +7,4 @@ assignees: buluma
 
 ---
 
-Lint Failed
+{{ context.payload.commits }}
