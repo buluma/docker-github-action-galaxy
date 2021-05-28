@@ -36,6 +36,11 @@ jobs:
       - name: Get result
         run: echo "${{steps.set-result.outputs.result}}"
         
+      - name: View context attributes
+        uses: actions/github-script@v4
+        with:
+          script: console.log(context)
+        
       - name: Create Issue
         if: failure()
         uses: buluma/create-an-issue@v2
