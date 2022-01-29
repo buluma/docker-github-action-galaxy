@@ -69,6 +69,8 @@ jobs:
       - run: |
           export FOO=bar
           echo "::set-env name=FOO::$FOO"
+          env:
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       - run: echo $FOO
       
       - uses: nashmaniac/create-issue-action@v1.1
