@@ -4,7 +4,7 @@ name: Build and Push Container
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
     inputs:
       debug:
