@@ -2,7 +2,7 @@
 
 A container that is used for [GitHub actions galaxy](https://github.com/marketplace/actions/galaxy-action).
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/buluma/github-action-galaxy)
+[![Build and Push Container](https://github.com/buluma/docker-github-action-galaxy/actions/workflows/build-push.yml/badge.svg)](https://github.com/buluma/docker-github-action-galaxy/actions/workflows/build-push.yml)
 
 This container contains:
  - ansible-galaxy
